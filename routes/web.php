@@ -3,6 +3,7 @@
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Student;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::post('/person/store', [PersonController::class, 'store'])->name('person.s
 
 Route::get('grade/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class, 'myCourse']);
 
+Route::get('student/index', 'StudentController@index')->name('student.index');
 
 
 Auth::routes();

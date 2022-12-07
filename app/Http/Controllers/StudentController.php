@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Student;
 
 class StudentController extends Controller
 {
@@ -11,6 +12,19 @@ class StudentController extends Controller
     private $nrp = '200613013';
     private $name = 'Alifudin Nuryansyah Putra';
     private $course, $task, $quiz, $mid_term, $final;
+
+
+    public function index()
+    {
+        $students = Student::all();
+
+        foreach ($students as $student) {
+            echo "<br />Nama: " . $student->name;
+            echo "<br />NRP: " . $student->code;
+            echo "<br />Kelas: " . $student->group;
+            echo "<br />";
+        }
+    }
 
     public function myCourse($course, $task, $quiz, $mid_term, $final)
     {
