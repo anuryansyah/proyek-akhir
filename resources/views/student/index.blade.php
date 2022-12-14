@@ -19,7 +19,7 @@
             <th scope="row">{{ $loop->index + 1 }}</th>
             <td>{{ $student->code }}</td>
             <td>{{ $student->name }}</td>
-            <td>{{ $student->gender }}</td>
+            <td>{{ $student->gender == 'P' ? 'Pria' : 'Wanita' }}</td>
             <td>{{ $student->birth_date }}</td>
             <td>{{ $student->birth_place }}</td>
           </tr>            
