@@ -18,12 +18,7 @@ class StudentController extends Controller
     {
         $students = Student::all();
 
-        foreach ($students as $student) {
-            echo "<br />Nama: " . $student->name;
-            echo "<br />NRP: " . $student->code;
-            echo "<br />Kelas: " . $student->group;
-            echo "<br />";
-        }
+        return view('student.index', ['students' => $students]);
     }
 
     public function myCourse($course, $task, $quiz, $mid_term, $final)
