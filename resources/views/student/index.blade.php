@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  <div class="container">
+  <div class="container py-3">
     <h1 class="mb-3">Data Mahasiswa</h1>
 
     @if (session()->get('success'))

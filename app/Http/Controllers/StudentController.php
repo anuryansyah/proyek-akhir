@@ -11,7 +11,9 @@ class StudentController extends Controller
 
     public function index()
     {
-        $students = Student::all();
+        // $students = Student::all();
+
+        $students = Student::orderBy('code', 'asc')->get();
 
         return view('student.index', compact('students'));
     }
@@ -83,7 +85,7 @@ class StudentController extends Controller
 
 
 
-    
+
 
 
 
