@@ -4,42 +4,96 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentController extends Controller
 {
+
+    public function index()
+    {
+        $students = Student::all();
+
+        return view('student.index', compact('students'));
+    }
+
+    public function create() 
+    {
+        return view(('student.create'));
+    }
+
+    public function store(Request $request)
+    {
+        $students = new Student( $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required',
+        ]));
+
+        // dd($students);
+
+        $students->save();
+        return redirect('/student')->with('success', 'Student Saved!');
+    }
+    
+    public function destroy($id) 
+    {
+        $student = Student::find($id);
+        
+        // dd($student);
+
+        $student->delete();
+        
+        return redirect('/student')->with('success', 'Student Deleted!');
+    }
+
+    public function edit($id) 
+    {
+        $student = Student::find($id);
+
+        return view('student.edit', compact('student'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'birth_date' => 'required',
+            'birth_place' => 'required',
+        ]);
+
+        $student = Student::find($id);
+        $student->code = $request->code;
+        $student->name = $request->name;
+        $student->gender = $request->gender;
+        $student->birth_place = $request->birth_place;
+        $student->birth_date = $request->birth_date;
+
+        $student->save();
+        
+        return redirect('/student')->with('success', 'Student Updated!');
+    }
+
+
+
+
+
+
+
+    
+
+
+
+
 
     // Membuat variable
     private $nrp = '200613013';
     private $name = 'Alifudin Nuryansyah Putra';
     private $course, $task, $quiz, $mid_term, $final;
-
-
-    public function index()
-    {
-        // $students = Student::all();
-
-        // $students = Student::where('gender', 'P')
-        //             ->orWhere('birth_place', 'Bandung')            
-        //             ->get();
-
-        // $students = Student::orderBy('name', 'desc')->get();
-
-        // $students = Student::where('code', 'LIKE', '%7%')->get();
-        
-        // $students = Student::where(['gender' => 'W', 'birth_place' => 'Jakarta'])->get();
-        
-        // $students = Student::where('code', 'LIKE', '%2%')->where('birth_place', 'Jakarta')
-        //             ->orWhere('birth_place', 'LIKE', '%u%')->where('gender', 'W')
-        //             ->get();
-
-        // $students = Student::whereMonth('birth_date', '03')->get();
-
-        // $students = Student::take(5)->get();
-
-        $students = Student::latest()->limit(5)->get();
-
-        return view('student.index', ['students' => $students]);
-    }
+    
 
     public function myCourse($course, $task, $quiz, $mid_term, $final)
     {

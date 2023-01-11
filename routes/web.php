@@ -34,7 +34,8 @@ Route::post('/person/store', [PersonController::class, 'store'])->name('person.s
 
 Route::get('grade/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class, 'myCourse']);
 
-Route::get('student', 'StudentController@index')->name('student.index');
+// Route::get('student', 'StudentController@index')->name('student.index');
 
+Route::resource('student', 'StudentController');
 
 Auth::routes();
